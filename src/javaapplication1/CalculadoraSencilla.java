@@ -302,13 +302,16 @@ public class CalculadoraSencilla extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        pulsaciones +=1;
-        if (pulsaciones<=1) {
+        
+        if (pulsaciones<1) {
+            pulsaciones +=1;
             Texto ="";  
             n1 =  Double.parseDouble(jLabel1.getText());
             operacion="+";
             jLabel2.setText(jLabel1.getText()+operacion);
             jLabel1.setText("");
+            punto = false;
+       
 
            
         }
@@ -319,60 +322,63 @@ public class CalculadoraSencilla extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
             double r; 
             if (Texto =="") {
-            jLabel1.setText("");
+                jLabel1.setText("");
             }else{
- 
-            n2 =  Double.parseDouble(jLabel1.getText());
-            if (operacion =="+") {
-              r =n1+n2;    
-            }else if (operacion =="-"){
-                r =n1-n2;
-            }else if (operacion =="X"){
-                r =n1*n2;
-            }else
-                r = n1 / n2;
-    
-            
-            jLabel1.setText(String.valueOf(r));
-            pulsaciones = 0;
-            operacion ="";
-            Texto =""; 
-            jLabel2.setText("");
+
+                n2 =  Double.parseDouble(jLabel1.getText());
+                if (operacion =="+") {
+                  r =n1+n2;    
+                }else if (operacion =="-"){
+                    r =n1-n2;
+                }else if (operacion =="X"){
+                    r =n1*n2;
+                }else
+                    r = n1 / n2;
+
+
+                jLabel1.setText(String.valueOf(r));
+                pulsaciones = 0;
+                operacion ="";
+                Texto =""; 
+                jLabel2.setText("");
+                punto = false;
             }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+          if (pulsaciones < 1) {
             pulsaciones +=1;
-            
-        if (pulsaciones<=1) {
             operacion = "-";
             Texto ="";  
             n1 =  Double.parseDouble(jLabel1.getText());
             jLabel2.setText(jLabel1.getText()+operacion);
             jLabel1.setText("");
+            punto = false;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-         pulsaciones +=1;    
-        if (pulsaciones<=1) {
+        if (pulsaciones < 1) {
+            pulsaciones +=1;
             operacion = "X";
             Texto ="";  
             n1 =  Double.parseDouble(jLabel1.getText());
             jLabel2.setText(jLabel1.getText()+operacion);
             jLabel1.setText("");
+            punto = false;
         }            // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-               pulsaciones +=1;    
-        if (pulsaciones<=1) {
+        if (pulsaciones < 1) {
+            pulsaciones +=1;
             operacion = "/";
             Texto ="";  
             n1 =  Double.parseDouble(jLabel1.getText());
             jLabel2.setText(jLabel1.getText()+operacion);
             jLabel1.setText("");
-        }            // TO        // TODO add your handling code here:
+            punto = false;
+        }          
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -411,14 +417,29 @@ public class CalculadoraSencilla extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-               Texto +=jButton12.getText();
-                    jLabel1.setText(Texto);        // TODO add your handling code here:
+        
+        if (punto == false){
+            if (jLabel1.getText().equals("") || jLabel1.getText().equals("0") ){       
+                     // TODO add your handling code here:
+                     jLabel1.setText("0.");
+                     Texto +=jLabel1.getText();
+                      punto = true; // esto evita que se pulsen mas puntos
+            }else{
+                Texto +=jButton12.getText();
+                jLabel1.setText(Texto);
+                 punto = true; // esto evita que se pulsen mas puntos
+            }
+           
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
-
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                 Texto= "";
-                jLabel1.setText("");// TODO add your handling code here:
+                jLabel1.setText("0");// TODO add your handling code here:
+                jLabel2.setText("");
                 operacion = "";
+                punto = false;
                 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -457,6 +478,7 @@ public class CalculadoraSencilla extends javax.swing.JFrame {
             }
         });
     }
+    private boolean punto = false;
     private String operacion="";
     private String Texto ="";
     private double n1,n2;
